@@ -3,6 +3,9 @@ ApplesToApples::Application.routes.draw do
   get "game/destroy"
   get "game/join"
   get "game/leave"
+  
+  root => "/game/index.html"
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

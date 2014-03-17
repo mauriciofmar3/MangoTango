@@ -1,4 +1,11 @@
 <!doctype html>
+
+<% if cookies[:user].nil?  %>
+  <script type="text/javascript">
+    window.location.href="/game/index"  // put your correct path in a string here
+  </script>
+<% end %>
+
 <html>
 	<head>
 	<meta charset="UTF-8">
@@ -9,7 +16,7 @@
 	<body>
 		<div class="maint">
 		  <div class="headert">
-		    <div class="logo"><img src="images/logo.png" alt=""></div>
+		    <div class="logo"><%= image_tag "logo.png" %></div>
 		    <div class="header-center">
 		    </div>
 		    <div class="header-right">
@@ -20,65 +27,58 @@
 
 		  <div class="body-content">
 		  <div class="content-left">
-		  <h2>TROLLFACE Wins Round 09!</h2>
+		  	<h2>TROLLFACE Wins Round 09!</h2>
 
-		  <div class="green-box">
-		    <div class="box-top">
-		      <div class="box-top-left">
-		        <span class="smallt">Table #: 000013245</span><br/>
-		        <span class="bigt">TABLE: Rawxy</span>
-		      </div>
-		      <div class="box-top-right">
-		        <div class="namet">Round:</div>
-		        <div class="valuet">10/14</div>
-		        <div class="namet greyt">The Judge:</div>
-		        <div class="valuet whitet">MauMauMau</div>
-		        <div class="namet greyt">Last winner:</div>
-		        <div class="valuet whitet">TrollFace</div>
-		      </div>
-		    </div>
-		    <div class="box-center">
-		      <ul id="playedCards">
-		        <li><div class="name">Word 1</div><div class="sign">?</div></li>
-		        <li><div class="name">Word 2</div><div class="sign">?</div></li>
-		        <li><div class="name">Word 3</div><div class="sign">?</div></li>
-		        <li><div class="name">Word 4</div><div class="sign">?</div></li>
-		        <li><div class="name">Word 5</div><div class="sign">?</div></li>
-		        <li><div class="name">Word 6</div><div class="sign">?</div></li>
-		        <li><div class="name">Word 7</div><div class="sign">?</div></li>
-		      </ul>
-		    </div>
-		    <div class="box-bottom">
-		      <div class="box-bottoml">ADJECTIVE: Agonizing</div>
-		      <div class="box-bottomr">Definition: causing great physical or mental pain.</div>
-		    </div>
+			  <div class="green-box">
+			    <div class="box-top">
+			      <div class="box-top-left">
+			        <span class="smallt">Table #: <%= @game.id %></span><br/>
+			        <span class="bigt">TABLE: <%= @game.name %></span>
+			      </div>
+			      <div class="box-top-right">
+			        <div class="namet">Round:</div>
+			        <div class="valuet"><%= @game.current_round %>/<%= @game.max_rounds %></div>
+			        <div class="namet greyt">The Judge:</div>
+			        <div class="valuet whitet">MauMauMau</div>
+			        <div class="namet greyt">Last winner:</div>
+			        <div id="last_winner" class="valuet whitet"><%= @last_winner %></div>
+			      </div>
+			    </div>
+			    <div class="box-center">
+			      <ul id="playedCards">
+			      	<% @game.used_cards.each do |card| %>
+			        	<li><div class="name"><%= card.word %></div><div class="sign">?</div></li>
+			       	<% end %>
+			      </ul>
+			    </div>
+			    <div class="box-bottom">
+			      <div class="box-bottoml">ADJECTIVE: <%= @game.current_adjective.word %></div>
+			      <div class="box-bottomr">Definition: causing great physical or mental pain.</div>
+			    </div>
+			  </div>
+ 
+			  <div class="blue-box">
+			    <div class="box-top">
+			      <div class="box-top-left"><span class="bigt">TABLE: Rawxy</span></div>
+			    </div>
+			    <div class="box-center">
+			      <ul id='userHand'>
+			      </ul>
+			    </div>
+			  </div>
+
+			  <div class="grey-box"><strong>Nouns Used:</strong> Airplane, Leslie Knope, Wilfred, South Africa, Varnish, Basketball, Breakfast, Instruments, Lumber, Australia,
+			Games,Minister, Government, Silver, Sidewalk, Zoo, Voyage, Sketch, Architecture
+			  </div>
 		  </div>
 
-		  <div class="blue-box">
-		    <div class="box-top">
-		      <div class="box-top-left"><span class="bigt">TABLE: Rawxy</span></div>
-		    </div>
-		    <div class="box-center">
-		      <ul id='userHand'>
-		        <script src='js/game.js'></script>
-		        <!--li><div class="name">Word 14</div><div class="sign">?</div></li-->
-		      </ul>
-		    </div>
-		  </div>
-
-		  <div class="grey-box"><strong>Nouns Used:</strong> Airplane, Leslie Knope, Wilfred, South Africa, Varnish, Basketball, Breakfast, Instruments, Lumber, Australia,
-		Games,Minister, Government, Silver, Sidewalk, Zoo, Voyage, Sketch, Architecture
-		  </div>
-		  </div>
-
-		  <script src='js/chat.js'></script>
 		  <div class="content-right">
 		    <div class="chat-box-out">
 		      <h2>Chat</h2>
 		      <div class="chat-box">
 		        <div class="chat-content">
 		        </div>
-		        <img src="images/border.jpg" alt=""></img>
+						<%= image_tag "border.jpg"%>
 		        <div class="chat-bottom">
 		          <div class="chat-bottom-left">
 		            <input id='chat-input' type='text' onkeypress='{if(event.keyCode==13)sendChatLine()}'></input>
@@ -98,33 +98,15 @@
 		      <div class="ignor">Ignore</div>
 		      <div class="skip">Skip</div>
 		    </div>
-		  	<% @players.each do |player| %>
-		  		<div class='score-content'>
-  					<div class='players'><%= player.user.name %></div>
-  					<div class='scores'><%= player.score %></div>
+		  	<% @players.each_index do |index| %>
+		  		<div class='score-content <%= ' greenb' if index.odd? %>'>
+  					<div class='players'><%= @players[index].user.name %></div>
+  					<div class='scores'><%= @players[index].score %></div>
   					<div class='ignor'>Ignore</div>
  						<div class='skip'>Skip</div>
 					</div>
 		  	<% end %>
 
-		    <div class="score-content">
-		      <div class="players">Players</div>
-		      <div class="scores">Scores</div>
-		      <div class="ignor">Ignore</div>
-		      <div class="skip">Skip</div>
-		    </div>
-		    <div class="score-content greenb">
-		      <div class="players">Players</div>
-		      <div class="scores">Scores</div>
-		      <div class="ignor">Ignore</div>
-		      <div class="skip">Skip</div>
-		    </div>
-		    <div class="score-content">
-		      <div class="players">Players</div>
-		      <div class="scores">Scores</div>
-		      <div class="ignor">Ignore</div>
-		      <div class="skip">Skip</div>
-		    </div>
 		    <div class="score-box-bottom">
 		      <div class="score-box-bottom-left"><a href="#">LEAVE TABLE ):</a></div>
 		      <div class="score-box-bottom-right"><a href="#">INVITE MORE PEOPLE!</a></div>
@@ -134,15 +116,23 @@
 		  </div>
 
 		  </div>
-		  <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | <script type="text/javascript">
-		// Popup window code
-		function newPopup(url) {
-			popupWindow = window.open(
-				url,'popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-		}
+		  <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | 
+  	<script type="text/javascript">
+			// Popup window code
+			function chooseCard(element) {
+				$.ajax('/cards/hand/game/' + <%= @game.id %> + '/word/' + element.innerHTML).done( function () {
+			  	$('#userHand').load('/cards/hand/game/' + <%= @game.id %>); 
+			  	console.log("JFKLS");
+			  }); 
+			}
+			$('#userHand').load('/cards/hand/game/' + <%= @game.id %>); 
+			function newPopup(url) {
+				popupWindow = window.open(
+					url,'popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+			}
 		</script>
 		<a href="JavaScript:newPopup('http://mauxy.net/ApplesToApples/terms.html');">PRIVACY</a><br>
-		© 2013 LATER, MAUXY. ALL RIGHTS RESERVED.</div>
+		© 2014 LATER, MAUXY. ALL RIGHTS RESERVED.</div>
 		  <div class="clrt"></div>
 		</div>
 	</body>

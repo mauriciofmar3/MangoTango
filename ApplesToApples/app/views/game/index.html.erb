@@ -1,0 +1,14 @@
+
+<script>]
+	function createGame(input) {
+		window.location.href= "/game/create/" + input;
+	}
+</script>
+
+	<br />
+<input type='text' id="game"></input>
+<input type='button' value='Start New Game' onclick='createGame(document.getElementById("#game"))'</input>
+<% @games.each do |game| %>
+	<br />
+	<a href="/game/join/<%= game.id %>">Game <%= game.id %> <%= game.name %></a>
+<% end %>

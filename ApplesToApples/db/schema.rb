@@ -11,23 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203005755) do
+ActiveRecord::Schema.define(version: 20140317025126) do
 
   create_table "cards", force: true do |t|
     t.integer  "game_id"
     t.integer  "word_id"
     t.integer  "player_id"
-    t.boolean  "used"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "chosen"
+    t.integer  "used",       default: 0
   end
 
   create_table "games", force: true do |t|
     t.string   "name"
-    t.string   "current_count"
     t.boolean  "finished"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "max_rounds"
+    t.integer  "current_round"
+    t.integer  "current_player_id"
   end
 
   create_table "players", force: true do |t|
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 20140203005755) do
 
   create_table "words", force: true do |t|
     t.string   "word"
-    t.boolean  "adjective"
+    t.boolean  "adjective",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

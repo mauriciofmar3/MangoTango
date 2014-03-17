@@ -1,0 +1,13 @@
+<input type='text' id='input'></input>
+<input type='button' value='LOGIN' onclick='login($("#input")[0].value)'></input>
+<input type='button' value='REGISTER' onclick='register($("#input")[0].value)'></input>
+
+<script>
+	function login(input) {
+		window.location.href= "/user/login/" + input;
+	}
+	
+	function register(input) {
+		window.location.href= "/user/register/" + input;
+	}
+</script>

@@ -7,10 +7,14 @@ ApplesToApples::Application.routes.draw do
     get '/user/index', to: 'user#index'
     get '/user/login/:name', to: 'game#login'
     get '/user/register/:name', to: 'game#login'
+    
+    get '/user/register/', to: 'game#register'
   
     # js ajax calls
     get '/cards/hand/game/:game/', to: 'game#hand'
     get '/cards/hand/game/:game/word/:word', to: 'game#play_card'
+    
+    get '/chat', to: 'chat#index'
     
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

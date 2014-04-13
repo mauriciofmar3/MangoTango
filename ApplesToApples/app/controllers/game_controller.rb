@@ -37,6 +37,11 @@ class GameController < ApplicationController
   def leave
     # return to lobby
   end
+  
+  def register
+    
+  end
+
 
   def hand
     game = Game.find(params[:game])

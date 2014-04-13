@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mango Tango</title>
+<link href="default.css" rel="stylesheet" type="text/css">
+<link href="fonts.css" rel="stylesheet" type="text/css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="maint">
+  <div class="headert">
+    <div class="logo"><img src="images/logo.png" alt=""></div>
+    <div class="header-center">
+      <div class="menut"><a href="/ApplesToApples" class="current">Home</a> <a href="#">About</a> <a href="tutorial.html">Tutorail</a></div>
+      <div class="coffee">Like the Game? <br/>Buy Us a Coffee</div>
+    </div>
+    <div class="header-right">
+      <div class="social">
+        <div class="header-leftl">Login/Sign Up:</div>
+        <div class="header-rightl"><a href="#"><img src="images/facebook-icon.png" alt=""></a><a href="#"><img src="images/google-plus-icon.png" alt=""></a><a href="#"><img src="images/noreveal.png" alt=""></a></div>
+      </div>
+      <div class="search">
+        <div class="search-left">Play as Guest:</div>
+        <input id='username' type="text" class="textt" placeholder="Enter Your Name">
+        <input type="submit" value="PLAY" onclick='sendCookie()' class="submit-btn">
+      </div>
+    </div>
+  </div>
+ 
+  
+  <div class="body-content">
+  <div class="content-left">
+  <h2>TROLLFACE Wins Round 09!</h2>
+  
+  <div class="green-box">
+    <div class="box-top">
+      <div class="box-top-left">
+        <span class="smallt">Table #: 000013245</span><br/>
+        <span class="bigt">TABLE: Rawxy</span>
+      </div>
+      <div class="box-top-right">
+        <div class="namet">Round:</div>
+        <div class="valuet">10/14</div>
+        <div class="namet greyt">The Judge:</div>
+        <div class="valuet whitet">MauMauMau</div>
+        <div class="namet greyt">Last winner:</div>
+        <div class="valuet whitet">TrollFace</div>
+      </div>
+    </div>
+    <div class="box-center">
+      <ul>
+        <li><div class="name">Word 1</div><div class="sign">?</div></li>
+        <li><div class="name">Word 2</div><div class="sign">?</div></li>
+        <li><div class="name">Word 3</div><div class="sign">?</div></li>
+        <li><div class="name">Word 4</div><div class="sign">?</div></li>
+        <li><div class="name">Word 5</div><div class="sign">?</div></li>
+        <li><div class="name">Word 6</div><div class="sign">?</div></li>
+        <li><div class="name">Word 7</div><div class="sign">?</div></li>
+      </ul>
+    </div>
+    <div class="box-bottom">
+      <div class="box-bottoml">ADJECTIVE: Agonizing</div>
+      <div class="box-bottomr">Definition: causing great physical or mental pain.</div>
+    </div>
+  </div>
+  
+  <div class="blue-box">
+    <div class="box-top">
+      <div class="box-top-left"><span class="bigt">TABLE: Rawxy</span></div>
+    </div>
+    <div class="box-center">
+      <ul>
+        <li><div class="name">Word 8</div><div class="sign">?</div></li>
+        <li><div class="name">Word 9</div><div class="sign">?</div></li>
+        <li><div class="name">Word 10</div><div class="sign">?</div></li>
+        <li><div class="name">Word 11</div><div class="sign">?</div></li>
+        <li><div class="name">Word 12</div><div class="sign">?</div></li>
+        <li><div class="name">Word 13</div><div class="sign">?</div></li>
+        <li><div class="name">Word 14</div><div class="sign">?</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grey-box"><strong>Nouns Used:</strong> Airplane, Leslie Knope, Wilfred, South Africa, Varnish, Basketball, Breakfast, Instruments, Lumber, Australia,
+Games,Minister, Government, Silver, Sidewalk, Zoo, Voyage, Sketch, Architecture
+  </div>
+  </div>
+ 
+  <script src='chat.js'></script> 
+  <div class="content-right">
+    <div class="chat-box-out">
+      <h2>Chat</h2>
+      <div class="chat-box">
+        <div class="chat-content">
+          <span style="color:#F00"><strong>MauMauMau:</strong></span> Ohai<br>
+          <span style="color:#00F"><strong>TrollFace:</strong></span> Cool site!<br>
+          <span style="color:#F3C"><strong>Rawxy:</strong></span> I loooove the design!<br>
+          <span style="color:#93C"><strong>Player 1:</strong></span> Blah blah blah<br>
+          <span style="color:#933"><strong>MauMauMau:</strong></span> No you!
+        </div>
+        <img src="images/border.jpg" alt=""></img>
+        <div class="chat-bottom">
+          <div class="chat-bottom-left">
+            <input id='chat-input' type='text' onkeypress='{if(event.keyCode==13)sendChatLine()}'></input>
+          </div>
+          <div class="chat-bottom-right">
+            <div class="btn"><a href="#">send </a></div>
+            <div class="sound"><a href="#" class="current">On</a>/<a href="#">Off</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="score-box">
+    <div class="title">
+      <div class="players">Players</div>
+      <div class="scores">Scores</div>
+      <div class="ignor">Ignore</div>
+      <div class="skip">Skip</div>
+    </div>
+    <div class="score-content greenb">
+      <div class="players">Players</div>
+      <div class="scores">Scores</div>
+      <div class="ignor">Ignore</div>
+      <div class="skip">Skip</div>
+    </div>
+    <div class="score-content">
+      <div class="players">Players</div>
+      <div class="scores">Scores</div>
+      <div class="ignor">Ignore</div>
+      <div class="skip">Skip</div>
+    </div>
+    <div class="score-content greenb">
+      <div class="players">Players</div>
+      <div class="scores">Scores</div>
+      <div class="ignor">Ignore</div>
+      <div class="skip">Skip</div>
+    </div>
+    <div class="score-content">
+      <div class="players">Players</div>
+      <div class="scores">Scores</div>
+      <div class="ignor">Ignore</div>
+      <div class="skip">Skip</div>
+    </div>
+    <div class="score-content greenb">
+      <div class="players">Players</div>
+      <div class="scores">Scores</div>
+      <div class="ignor">Ignore</div>
+      <div class="skip">Skip</div>
+    </div>
+    <div class="score-content">
+      <div class="players">Players</div>
+      <div class="scores">Scores</div>
+      <div class="ignor">Ignore</div>
+      <div class="skip">Skip</div>
+    </div>
+    <div class="score-box-bottom">
+      <div class="score-box-bottom-left"><a href="#">LEAVE TABLE ):</a></div>
+      <div class="score-box-bottom-right"><a href="#">INVITE MORE PEOPLE!</a></div>
+    </div>
+  </div>
+
+  </div>
+
+  </div>
+  <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | <a href="#">PRIVACY</a><br>
+© 2013 LATER, MAUXY. ALL RIGHTS RESERVED.</div>
+  <div class="clrt"></div>
+</div>
+</body>
+</html>

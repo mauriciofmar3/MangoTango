@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mango Tango</title>
+<link href="default.css" rel="stylesheet" type="text/css">
+<link href="fonts.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="maint">
+  <div class="headert">
+    <div class="logo"><img src="images/logo.png" alt=""></div>
+    <div class="header-center">
+      <div class="menut"><a href="/ApplesToApples" class="current">Home</a> <a href="#">About</a> <a href="#">Tutorail</a></div>
+      <div class="coffee">Like the Game? <br/>
+Buy Us a Coffee</div>
+    </div>
+    <div class="header-right">
+    <div class="social">
+    <div class="header-leftl">Login/Sign Up:</div>
+    <div class="header-rightl"><a href="#"><img src="images/facebook-icon.png" alt=""></a><a href="#"><img src="images/google-plus-icon.png" alt=""></a><a href="#"><img src="images/noreveal.png" alt=""></a></div></div>
+    <div class="search">
+    <div class="search-left">Play as Guest:</div>
+    <input type="text" class="textt" placeholder="Enter Your Name">
+    <input type="submit" value="PLAY" class="submit-btn">
+    </div>
+    </div>
+  </div>
+ 
+  
+  <div class="body-content">
+  <div class="content-left"><br><br><br><br>
+  <div class="green-box">
+  <div class="box-top">
+   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      heightStyle: "content"
+    });
+  });
+  </script>
+    <script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  });
+  </script>
+    <script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      event: "click hoverintent"
+    });
+  });
+ 
+  /*
+   * hoverIntent | Copyright 2011 Brian Cherne
+   * http://cherne.net/brian/resources/jquery.hoverIntent.html
+   * modified by the jQuery UI team
+   */
+  $.event.special.hoverintent = {
+    setup: function() {
+      $( this ).bind( "mouseover", jQuery.event.special.hoverintent.handler );
+    },
+    teardown: function() {
+      $( this ).unbind( "mouseover", jQuery.event.special.hoverintent.handler );
+    },
+    handler: function( event ) {
+      var currentX, currentY, timeout,
+        args = arguments,
+        target = $( event.target ),
+        previousX = event.pageX,
+        previousY = event.pageY;
+ 
+      function track( event ) {
+        currentX = event.pageX;
+        currentY = event.pageY;
+      };
+ 
+      function clear() {
+        target
+          .unbind( "mousemove", track )
+          .unbind( "mouseout", clear );
+        clearTimeout( timeout );
+      }
+ 
+      function handler() {
+        var prop,
+          orig = event;
+ 
+        if ( ( Math.abs( previousX - currentX ) +
+            Math.abs( previousY - currentY ) ) < 7 ) {
+          clear();
+ 
+          event = $.Event( "hoverintent" );
+          for ( prop in orig ) {
+            if ( !( prop in event ) ) {
+              event[ prop ] = orig[ prop ];
+            }
+          }
+          // Prevent accessing the original event since the new event
+          // is fired asynchronously and the old event is no longer
+          // usable (#6028)
+          delete event.originalEvent;
+ 
+          target.trigger( event );
+        } else {
+          previousX = currentX;
+          previousY = currentY;
+          timeout = setTimeout( handler, 100 );
+        }
+      }
+ 
+      timeout = setTimeout( handler, 100 );
+      target.bind({
+        mousemove: track,
+        mouseout: clear
+      });
+    }
+  };
+  </script>
+    <script>
+  $(function() {
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+    $( "#accordion" ).accordion({
+      icons: icons
+    });
+    $( "#toggle" ).button().click(function() {
+      if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+        $( "#accordion" ).accordion( "option", "icons", null );
+      } else {
+        $( "#accordion" ).accordion( "option", "icons", icons );
+      }
+    });
+  });
+  </script>
+</head>
+<body>
+ 
+<div id="accordion">
+  <h3>Game Accounts</h3>
+  <div>
+    <p>Sign up with us using your Facebook or G-Mail accounts! Or, if you don't have either, you are more than welcome to sign up through us! Players are also able to play as guests if they wish.</p>
+    <p><strong>What are the benefits of signing up?</strong><br>
+<ul>    
+<li>Your stats are recorded through the game.</li>
+    <li>You will be able to save table settings.</li>
+    <li>Account Profiles (In the future)</li>
+    <li>You will be able to participate in competitions. (Future)</li></ul>
+      </p>
+  </div>
+  <h3>Point of the Game</h3>
+  <div>
+    <p>The object of the game is to win the most rounds by playing a noun from one's hand to best &quot;match&quot; that round's communal adjective, which will be decided by the Judge.</p>
+  </div>
+  <h3>Game Rules</h3>
+  <div>
+     <p><ul>
+      <li>One judge per round.</li>
+      <li>Judges will rotate throughout the table</li>
+      <li>Each player must have a hand of 7 nouns or noun phrases at all times.  These nouns are only visible to their respective player.</li>
+      <li>Only the judge can decide which matches best with the adjective.</li>
+      <li>The adjective will be randomly selected by the system.</li>
+      <li>Each player except for the judge will select a noun.</li>
+      <li>The player who submitted the noun will not be visible to the judge.</li>
+      <li>The selected noun is the winner of the round.</li>
+      <li>The player who has submitted the nouns will be revealed after judgement.</li>
+      <li>A new noun will be distributed to each player after every round, except for the Judge.</li>
+      <li>Players are not allowed to hint at their cards to persuade the Judge.
+    </ul></p>
+  </div>
+   <h3>Starting Your Own Table</h3>
+  <div>
+    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
+    <ul>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+    </ul>
+  </div>
+  <h3>Site Rules</h3>
+  <div>
+    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
+    <ul>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+      <li>List item</li>
+    </ul>
+  </div>
+</div>
+    <div class="box-top-right"></div>
+  </div>
+  </div>
+  </div>
+  <br><br><br><br>text
+  </div>
+  <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | <a href="#">PRIVACY</a><br>
+© 2013 LATER, MAUXY. ALL RIGHTS RESERVED.</div>
+  <div class="clrt"></div>
+</div>
+</body>
+</html>

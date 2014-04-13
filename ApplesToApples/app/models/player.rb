@@ -7,7 +7,7 @@ class Player < ActiveRecord::Base
   def user
     @user ||= User.find(self.user_id)
   end
-  
+
   def hand
     cards = Card.where(player_id: self.id, game_id: self.game_id, used: false)
     while cards.size < 7 do

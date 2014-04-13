@@ -27,7 +27,7 @@
 
 		  <div class="body-content">
 		  <div class="content-left">
-		  	<h2>TROLLFACE Wins Round 09!</h2>
+		  	<h2>mau Wins Round 01!</h2>
 
 			  <div class="green-box">
 			    <div class="box-top">
@@ -59,7 +59,7 @@
  
 			  <div class="blue-box">
 			    <div class="box-top">
-			      <div class="box-top-left"><span class="bigt">TABLE: Rawxy</span></div>
+			      <div class="box-top-left"><!--span class="bigt">TABLE: <%= @game.name %></span--></div>
 			    </div>
 			    <div class="box-center">
 			      <ul id='userHand'>
@@ -121,18 +121,14 @@
 			// Popup window code
 			function chooseCard(element) {
 				$.ajax('/cards/hand/game/' + <%= @game.id %> + '/word/' + element.innerHTML).done( function () {
-			  	$('#userHand').load('/cards/hand/game/' + <%= @game.id %>); 
+			  	$('#userHand').load('//hand/game/' + <%= @game.id %>); 
 			  	console.log("JFKLS");
 			  }); 
 			}
 			$('#userHand').load('/cards/hand/game/' + <%= @game.id %>); 
-			function newPopup(url) {
-				popupWindow = window.open(
-					url,'popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-			}
 		</script>
-		<a href="JavaScript:newPopup('http://mauxy.net/ApplesToApples/terms.html');">PRIVACY</a><br>
-		© 2014 LATER, MAUXY. ALL RIGHTS RESERVED.</div>
+		<br>
+		</div>
 		  <div class="clrt"></div>
 		</div>
 	</body>

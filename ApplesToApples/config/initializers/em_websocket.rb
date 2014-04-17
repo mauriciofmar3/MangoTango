@@ -26,8 +26,9 @@ Thread.new {
         when 'connect'
           @sockets.push({:id=>client[:id], :socket=>ws})
           @sockets.each {|s| s[:socket].send h("chat: table#{client[:table_id]}: #{client[:id]} has connected!")}
+          @sockets.each {|s| s[:socket].send h("join: table#{client[:table_id]}: #{client[:id]} has connected!")}
         when 'say'
-          @sockets.each {|s| s[:socket].send h("chat: table#{client[:table_id]}: #{client[:id]} says : #{client[:data]}")}
+          @sockets.each {|s| s[:socket].send h("chat: table#{client[:table_id]}: #{client[:id]} : #{client[:data]}")}
         when 'pick_card'
           @sockets.each {|s| s[:socket].send h("pick_card: table#{client[:table_id]}: #{client[:id]} picks : #{client[:data]}")}
         end

@@ -1,2 +1,17 @@
-<h2 id="round_winner"><%= @last_winner.name %> Wins Round <%= ((@game.current_round) -1) %>!<br />
-"<%= @chosen_card_word %>" used for adjective "<%= @last_adjective_word %>"</h2>
+<% if @game.current_round == 1 %>
+	<% if @game.players.size != @game.max_players %>
+		<h2 id="round_winner"> Game Waiting to Start!<br />
+		Please Be Patient!</h2>
+	<% else %>
+		<h2 id="round_winner"> Game Ready to Start!<br />
+		Everyone Have Fun! Go!</h2>
+	<% end %>
+<% else %>
+	<h2 id="round_winner"><%= @last_winner.name %> Wins Round <%= ((@game.current_round) -1) %>!<br />
+	"<%= @chosen_card_word %>" used for "<%= @last_adjective_word %>"
+
+	<% if @game.finished %>
+		<br />Players: <%= User.joins(:players).where('players.id IN (?)', @winners.pluck(:id)).pluck(:name).join(",") %> Won!
+	<% end %>
+	</h2>
+<% end %>

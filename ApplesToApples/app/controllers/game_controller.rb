@@ -1,16 +1,24 @@
 class GameController < ApplicationController
   def create
-    game = Games.new
+    game = Game.new
     game.name = params[:name]
+    game.max_players = params[:players]
+    game.max_rounds = params[:rounds]
+    game.current_round = 1
+    game.current_player_id = nil
+    game.finished = false
     game.save
-    redirect_to :action => 'game#join'
+    redirect_to controller: 'game', action: 'lobby', game: game.id
   end
   
   def login
     if(User.where(name: params[:name]).count > 0)
       cookies[:user] = params[:name]
-      redirect_to controller: 'game', action: 'join', game: '1'
+      redirect_to controller: 'game', action: 'lobby'
     end
+    @games = Game.all.count
+    @current_games = Game.where(finished: false).count
+    @players = Player.all.count
   end
 
   def index
@@ -29,7 +37,9 @@ class GameController < ApplicationController
     @game = Game.find(params[:game])
     user = User.where(name: cookies[:user]).first
     if Player.where(user_id: user.id, game_id: @game.id).size == 0
-      Player.create(user_id: user.id, game_id: @game.id, score: 0)
+      player = Player.create(user_id: user.id, game_id: @game.id, score: 0)
+      @game.current_player_id = player.id
+      @game.save
     end
     @players = @game.players
     @player = Player.where(user_id: User.where(name: cookies[:user]).first.id).first
@@ -68,16 +78,15 @@ class GameController < ApplicationController
   
   def round_winner
     @game = Game.find(params[:game])
-    @chosen_card = Card.where(game_id: @game.id, chosen: @game.current_round-1).first
-    unless @chosen_card.empty?
-      puts Card.all.pluck(:chosen)
-      puts "#{@game.current_adjective.word} #{@game.current_adjective.chosen}"
+    unless @game.current_round == 1
+      @chosen_card = Card.where(game_id: @game.id, chosen: @game.current_round-1).first
       @last_winner = @chosen_card.player
       @last_adjective = Word.joins(:cards).where('cards.game_id' => @game.id, 'cards.used' => @game.current_round-1, adjective: true).first
-      puts "adjective #{@last_adjective.word}" 
-      puts "word #{@chosen_card.word}"
       @last_adjective_word = @last_adjective.word
       @chosen_card_word = @chosen_card.word
+      players = Player.where(game_id: @game.id).order(:score)
+      winning_score = players.last.score
+      @winners = Player.where(game_id: @game.id, score: winning_score)
     end
   end
   

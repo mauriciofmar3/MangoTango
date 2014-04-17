@@ -6,6 +6,11 @@ $ ->
 	ws = new WebSocket(url)	 
 	ws.open
 	
+	$("#send_button").on 'click', () ->
+		message = $("#chat-input")
+		ws.send(JSON.stringify({id: name, table_id: $('#game_id').html(), action: "say", data : message.val()}))
+		message.val('')
+		
 	$("#chat-input").on 'keypress', (e) ->			
 		if e.keyCode == 13
 			message = $("#chat-input")
@@ -25,13 +30,17 @@ $ ->
 		split = split_colon(message.data)
 		if split[0] == 'chat' && split[1].indexOf('table' + $('#game_id').html()) > 0
 			chat(split_colon(split[1])[1])
-		if split[0] == 'pick_card'
+		if split[0] == 'pick_card' && split[1].indexOf('table' + $('#game_id').html()) > 0
 			load_hand()
+		if split[0] == 'join' && split[1].indexOf('table' + $('#game_id').html()) > 0
+			refresh_page()
 		
 	chat = (message) ->
 		split = split_colon(message)
 		div = document.createElement('div')
-		$(div).html('<span style="color:#F00"><strong>' + split[0] + ':</strong></span>' + split[1])
+		if split[0] != ""
+			split[0] += ':'
+		$(div).html('<span style="color:#F00"><strong>' + split[0] + '</strong></span>' + split[1])
 		last = $('.chat-content').children().last()
 		if last.size() == 0 || last.html() != $(div).html()
 			$(".chat-content").append(div)

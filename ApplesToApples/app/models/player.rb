@@ -14,7 +14,7 @@ class Player < ActiveRecord::Base
 
   def hand
     cards = Card.where(player_id: self.id, game_id: self.game_id, used: false)
-    game_words = Word.joins(:cards).where('cards.game_id' => 1).pluck(:word)
+    game_words = Word.joins(:cards).where('cards.game_id' => self.game_id).pluck(:word)
     game_words = 'a' if game_words.empty?
     new_words = Word.where("adjective=false and word NOT IN (?)", game_words).order("rand()").limit(7-cards.size)
     new_words.each do |word|

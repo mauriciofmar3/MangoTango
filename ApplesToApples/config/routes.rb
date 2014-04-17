@@ -3,16 +3,20 @@ ApplesToApples::Application.routes.draw do
     root :to => 'game#login'
     get '/login', to: 'game#login'
     get '/lobby', to: 'game#lobby'
-    get '/game/join/:game', to: 'game#join'
-    get '/game/create/:name', to: 'game#login'
+    get '/about', to: 'game#about'
     get '/user/index', to: 'user#index'
     get '/user/login/:name', to: 'game#login'
     get '/user/register/:name', to: 'game#login'
     
     get '/user/register/', to: 'game#register'
     
+    get '/game/create/:name/rounds/:rounds/players/:players', to: 'game#create'
     
     get '/cards/delete_all', to: 'card#delete_all'
+  
+  
+    get '/game/join/:game', to: 'game#join'
+    get '/game/:game/join/:name/rounds/:rounds/players/:players', to: 'game#join'
   
     # js ajax calls
     get '/cards/hand/game/:game/', to: 'game#hand'

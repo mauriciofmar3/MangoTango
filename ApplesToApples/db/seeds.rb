@@ -24,6 +24,9 @@ def seed_file(file, adjective)
   end
 end
 
-seed_file('db/words/adjectives', true)
-seed_file('db/words/nouns', false)
+#seed_file('db/words/adjectives', true)
+#seed_file('db/words/nouns', false)
+
+seed_file('db/words/nutsy_adjectives', true)
+seed_file('db/words/nutsy_nouns', false)
   

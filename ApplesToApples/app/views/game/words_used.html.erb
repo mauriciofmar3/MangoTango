@@ -1,4 +1,4 @@
 <div id="words_used" class="grey-box">
-	<strong>Nouns Used:</strong> 
-	<%= Word.joins(:cards).where('cards.player_id' => @player.id).pluck(:word) %>
+	<strong>Cards Used:</strong> 
+	<%= Word.joins(:cards).where('cards.player_id = (?) AND cards.game_id = (?) AND cards.used > 0', @player.id, @game.id).pluck(:word).join(",")%>
 </div>

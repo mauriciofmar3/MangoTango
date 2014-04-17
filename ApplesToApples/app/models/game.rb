@@ -57,6 +57,7 @@ class Game < ActiveRecord::Base
     if game_started and player_not_judge and player_not_played and player_owns_card and game_not_finished
       card = Card.find(card.id)
       card.used=self.current_round
+      card.chosen=0
       card.save
     end
   end
@@ -85,29 +86,25 @@ class Game < ActiveRecord::Base
     puts "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
     puts "judge game_started player_is_judge player_not_played all_players_played"
     puts "judge #{game_started} #{player_is_judge} #{player_not_played} #{all_players_played} #{game_not_finished}"
-    game = self; 
     if game_started and player_is_judge and player_not_played and all_players_played and game_not_finished
       # card updates
       adjective = self.current_adjective
       adjective.used = self.current_round
-      card = Card.find(card.id)
       card.chosen = self.current_round
       
       #game updates
-      self.finished = true if game.max_rounds == game.current_round
-      self.current_round = game.current_round + 1
-      self.current_player_id = game.players.sort.rotate(game.players.find_index(game.current_player)+1).first.id
+      self.finished = true if self.max_rounds == self.current_round
+      self.current_round = self.current_round + 1
+      self.current_player_id = self.players.sort.rotate(self.players.find_index(self.current_player)+1).first.id
       
       #player updates
       winner = card.player
       winner.score = winner.score + 1
       
-      card.save
       adjective.save
       self.save
       winner.save
+      card.save
     end
-    card.chosen=self.current_round
-    card.save
   end
 end

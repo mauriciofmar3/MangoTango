@@ -13,13 +13,17 @@
   <div class="headert">
     <div class="logo"><img src="assets/logo.png" alt=""></div>
     <div class="header-center">
-      <div class="menut"><a href="#" class="current">Home</a> <a href="#">About</a> <a href="#">Tutorail</a></div>
+      <div class="menut">
+      	<a href="/lobby" class="current">Lobby</a> 
+      	<a href="/about">About</a> 
+      	<a href="/tutorial">Tutorail</a>
+      </div>
       <div class="cofy"><a href="#">Like the Game? <br/>
 Buy Us a Coffee</a></div>
     </div>
     <div class="header-right">
     <div class="social">
-    <div class="header-leftl"><a href="#">Logout</a></div>
+    <div class="header-leftl"><a href="/login">Logout</a></div>
     </div>
     
     </div>
@@ -33,13 +37,17 @@ Buy Us a Coffee</a></div>
   
   <div class="input-bg">
   <div class="lablet">Table Name:</div>
-  <div class="inputt"><input type="text" class="namet"></div>
+  <div class="inputt"><input id='table_name' type="text" class="namet"></div>
   </div>
   <div class="input-bg">
   <div class="lablet">Set Rounds:</div>
-  <div class="inputt"><select><option>1</option></select></div>
+  <div class="inputt"><select id='num_rounds'><option>5</option><option>10</option><option>15</option><option>20</option>
+  														<option>25</option><option>30</option><option>35</option><option>40</option>
+											</select></div>
   <div class="lablet">Max Players:</div>
-  <div class="inputt"><select><option>1</option></select></div>
+  <div class="inputt"><select id='num_players'><option>3</option><option>4</option><option>5</option><option>6</option>
+  														<option>7</option><option>8</option><option>9</option><option>10</option>
+  										</select></div>
   </div>
   <div class="input-bg">
   <div class="lablet">Password:</div>
@@ -48,14 +56,27 @@ Buy Us a Coffee</a></div>
   <div class="input-bg">
   <div class="lablet">Unranked:</div>
   <div class="inputt"><input type="checkbox" class="pt"></div>
-  <div class="texitt">Table #:  00001534</div>
+  <!--div class="texitt">Table #:  00001534</div-->
   </div>
    <div class="input-bg">
  
   <div class="settingone"><input type="checkbox" ></div>
   <div class="settingtwo">Make this the
 Default Setting</div>
-  <div class="settingthree"><input type="submit" value="" class="sbtnimg"></div>
+  <div class="settingthree"><input id='create_game' type="submit" value="" class="sbtnimg"></div>
+  
+  <script> 
+  	$(function() { 
+  		$('#create_game').on('click', function() {
+  			var name = $('#table_name').val()
+  			var rounds = $('#num_rounds').val()
+  			var players = $('#num_players').val()
+  			var location = "/game/create/" + name + "/rounds/" + rounds + "/players/" + players;
+  			console.log(location);
+  			window.location = location;
+  		});
+  	});
+  </script>
   
   </div>
   
@@ -66,13 +87,16 @@ Default Setting</div>
   <div class="announc-title">ANNOUNCEMENTS</div>
   <div class="announc-arrow"><a href="#"><img src="assets/darrow.png" alt=""></a><a href="#"><img src="assets/uarrow.png" alt=""></a></div>
   </div>
-   <div class="announc-text">
-   <div class="announct">By Mau on Oct. 25, 2013 - 10:25 PM
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </div>
-<div class="announct">By Mau on Oct. 25, 2013 - 10:25 PM
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </div>
-<div class="announct">By Mau on Oct. 25, 2013 - 10:25 PM
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </div>
+   	<div class="announc-text">
+	   	<div class="announct">By Mau on Mar. 25, 2014 - 10:25 PM
+				Game officially started. Everyone check the rules in the tutorial before playing please.
+			</div>
+			<div class="announct">By Mau on Apr. 14, 2014 - 10:25 PM
+				Game almost finished. Lobby working and full gameplay working, can be played by creating a new game.
+			</div>
+			<div class="announct">By Mau on Oct. 25, 2013 - 10:25 PM
+				This is an announcement. Everyone please read this, it's very important.
+			</div>
    </div>
   </div>
   </div>
@@ -85,7 +109,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
   <div class="score-box">
   <div class="title">
 	  <div class="tablename">Table Name</div>
-	  <div class="lock">Lock</div>
+	  <div class="lock">Locked</div>
 	  <div class="rounds">Rounds</div>
 	  <div class="players">Players</div>
 	  <div class="status">Status</div>
@@ -108,16 +132,16 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
   <div class="next"><a href="#"><img src="assets/next.png" alt=""></a></div>
   </div>
   </div>
-  <div class="joitable">
+  <!--div class="joitable">
   <div class="jointablet">Table - Rawxy: <span class="greyt">Rawr </span>, Roax, Mau, Yo, Blah, GameName</div>
   <div class="jointableb"><a href="#">Joint Table</a></div>
-  </div>
+  </div-->
  
   </div></div>
   </div>
   </div>
   <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | <a href="#">PRIVACY</a><br>
-© 2013 LATER, MAUXY. ALL RIGHTS RESERVED.</div>
+© 2013 LATER, MAU. ALL RIGHTS RESERVED.</div>
   <div class="clrt"></div>
 </div>
 </body>

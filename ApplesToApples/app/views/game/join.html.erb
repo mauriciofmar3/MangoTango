@@ -22,12 +22,16 @@
 	  <div class="headert">
 	    <div class="logo"><%= image_tag "logo.png" %></div>
 	    <div class="header-center">
-	      <div class="menut"><a href="#" class="current">Home</a> <a href="#">About</a> <a href="#">Tutorail</a></div>
-	      <div class="coffee"><a href="#">Like the Game? <br/>Buy Us a Coffee</a></div>
+	      <div class="menut">
+      	<a href="/lobby">Lobby</a> 
+      	<a href="/about">About</a> 
+      	<a href="/tutorial">Tutorail</a>
+      </div>
+      <div class="coffee"><a href="#">Like the Game? <br/>Buy Us a Coffee</a></div>
 	    </div>
 	    <div class="header-right">
 		    <div class="social">
-		    	<div class="header-leftl"><a href="#">Logout</a></div>
+		    	<div class="header-leftl"><a href="/login">Logout</a></div>
 		    </div>
 	    
 	    </div>
@@ -37,7 +41,7 @@
 			<div id='game_id' style='display: none'><%= @game.id %></div>
 		  <div class="body-content">
 		  <div class="content-left">
-		  	<h2 id="round_winner">mau Wins Round 01!</h2>
+		  	<h2 id="round_winner"></h2>
 		  	<!--h3><%= "#{@game.name} #{@game.current_player_id} #{@game.current_round}  #{@game.current_player.name}" %></h3>
 				<h3><%= Card.all.pluck(:used) %></h3-->
 
@@ -65,7 +69,7 @@
 			    </div>
 			    <div class="box-bottom">
 			      <div id="adjective" class="box-bottoml">ADJECTIVE: <%= @game.current_adjective.word %></div>
-			      <div class="box-bottomr">Definition: causing great physical or mental pain.</div>
+			      <!--div class="box-bottomr">Definition: causing great physical or mental pain.</div-->
 			    </div>
 			  </div>
  
@@ -95,7 +99,7 @@
 		            <input id='chat-input' type='text'></input>
 		          </div>
 		          <div class="chat-bottom-right">
-		            <div class="btn"><a href="#">send </a></div>
+		            <div id="send_button" class="btn"><a >send </a></div>
 		            <div class="sound"><a href="#" class="current">On</a>/<a href="#">Off</a></div>
 		          </div>
 		        </div>
@@ -127,8 +131,11 @@
 		  </div>
 
 		  </div>
-		  <div class=π"footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | 
-  	<script type="text/javascript">
+		  <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | 
+  	
+			<br>
+			</div>
+		<script type="text/javascript">
 			// Popup window code
 			function chooseCard(element) {
 				$.ajax('/cards/hand/game/' + <%= @game.id %> + '/word/' + element.innerHTML).done( function () {
@@ -139,8 +146,6 @@
 			//$('#userHand').load('/cards/hand/game/' + <%= @game.id %>); 
 			
 		</script>
-		<br>
-		</div>
 		  <div class="clrt"></div>
 		</div>
 	</body>

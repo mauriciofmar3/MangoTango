@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317025126) do
+ActiveRecord::Schema.define(version: 20140414160708) do
 
   create_table "cards", force: true do |t|
     t.integer  "game_id"
@@ -23,13 +23,20 @@ ActiveRecord::Schema.define(version: 20140317025126) do
     t.integer  "used",       default: 0
   end
 
+  create_table "chat_logs", force: true do |t|
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "games", force: true do |t|
     t.string   "name"
     t.boolean  "finished"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "max_rounds"
-    t.integer  "current_round"
+    t.integer  "max_players"
+    t.integer  "current_round",     default: 0
     t.integer  "current_player_id"
   end
 

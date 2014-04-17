@@ -18,6 +18,8 @@ ApplesToApples::Application.configure do
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+  
+  config.serve_static_assets = false
 
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
@@ -26,4 +28,8 @@ ApplesToApples::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  
+  # Web sockets
+  # Remove the Rack::Lock middleware
+  config.middleware.delete Rack::Lock
 end

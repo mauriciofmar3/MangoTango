@@ -41,7 +41,36 @@ class GameController < ApplicationController
   def register
     
   end
+  
+  def tutorial
+    
+  end
 
+  def current_adjective
+    @game = Game.find(params[:game])
+  end
+  
+  def player_list
+    @game = Game.find(params[:game])
+    @players = @game.players
+  end
+  
+  def round_information
+    @game = Game.find(params[:game])
+    @judge = Player.find(@game.current_player_id)
+  end
+  
+  def round_winner
+    @game = Game.find(params[:game])
+    @chosen_card = Card.where(game_id: @game.id, chosen: @game.current_round-1)
+    @last_winner = @chosen_card.player
+    @last_adjective = Word.joins(:cards).where('cards.game_id' => @game.id, 'cards.used' => @game.current_round-1, adjective: true)
+  end
+  
+  def words_used
+    @game = Game.find(params[:game])
+    @player = Player.find_by(user_id: User.find_by(name: cookies[:user]).id, game_id: @game.id)
+  end
 
   def hand
     game = Game.find(params[:game])
@@ -49,14 +78,19 @@ class GameController < ApplicationController
     @hand = player.hand
   end
   
-  def play_card
+  def load_judge
+    @game = Game.find(params[:game])
+  end
+  
+  def play_card 
+    
     game = Game.find(params[:game])
     player = Player.find_by(user_id: User.find_by(name: cookies[:user]).id, game_id: game.id)
     
-    card = Card.find_by(word_id: Word.find_by(word: params[:word]).id, game_id: game.id, player_id: player.id)
+    card = Card.find_by(word_id: Word.find_by(word: params[:word]).id, game_id: game.id)
+    puts "#{card.word}"
     if card
-      card.used=game.current_round
-      card.save
+      game.play_card(card, player)
     end
   end
 end

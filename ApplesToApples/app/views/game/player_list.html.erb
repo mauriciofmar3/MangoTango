@@ -1,0 +1,21 @@
+<div id="player_list" class="score-box">
+  <div class="title">
+    <div class="players">Players</div>
+    <div class="scores">Scores</div>
+    <div class="ignor">Ignore</div>
+    <div class="skip">Skip</div>
+  </div>
+	<% @players.each_index do |index| %>
+		<div class='score-content <%= ' greenb' if index.odd? %>'>
+			<div class='players'><%= @players[index].user.name %></div>
+			<div class='scores'><%= @players[index].score %></div>
+			<div class='ignor'>Ignore</div>
+			<div class='skip'>Skip</div>
+		</div>
+	<% end %>
+
+  <div class="score-box-bottom">
+    <div class="score-box-bottom-left"><a href="#">LEAVE TABLE ):</a></div>
+    <div class="score-box-bottom-right"><a href="#">INVITE MORE PEOPLE!</a></div>
+  </div>
+</div>

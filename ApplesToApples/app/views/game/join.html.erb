@@ -24,10 +24,13 @@
 		    </div>
 		  </div>
 
-
+			<div id='user_name' style='display: none'><%= cookies[:user] %></div>
+			<div id='game_id' style='display: none'><%= @game.id %></div>
 		  <div class="body-content">
 		  <div class="content-left">
-		  	<h2>mau Wins Round 01!</h2>
+		  	<h2 id="round-winner">mau Wins Round 01!</h2>
+		  	<h3><%= "#{@game.name} #{@game.current_player_id} #{@game.current_round}  #{@game.current_player.name}" %></h3>
+				<h3><%= Card.all.pluck(:used) %></h3>
 
 			  <div class="green-box">
 			    <div class="box-top">
@@ -35,7 +38,7 @@
 			        <span class="smallt">Table #: <%= @game.id %></span><br/>
 			        <span class="bigt">TABLE: <%= @game.name %></span>
 			      </div>
-			      <div class="box-top-right">
+			      <div id="round_info" class="box-top-right">
 			        <div class="namet">Round:</div>
 			        <div class="valuet"><%= @game.current_round %>/<%= @game.max_rounds %></div>
 			        <div class="namet greyt">The Judge:</div>
@@ -47,12 +50,12 @@
 			    <div class="box-center">
 			      <ul id="playedCards">
 			      	<% @game.used_cards.each do |card| %>
-			        	<li><div class="name"><%= card.word %></div><div class="sign">?</div></li>
+			        	<!--li><div class="name"><%= card.word %></div><div class="sign">?</div></li-->
 			       	<% end %>
 			      </ul>
 			    </div>
 			    <div class="box-bottom">
-			      <div class="box-bottoml">ADJECTIVE: <%= @game.current_adjective.word %></div>
+			      <div id="adjective" class="box-bottoml">ADJECTIVE: <%= @game.current_adjective.word %></div>
 			      <div class="box-bottomr">Definition: causing great physical or mental pain.</div>
 			    </div>
 			  </div>
@@ -63,12 +66,11 @@
 			    </div>
 			    <div class="box-center">
 			      <ul id='userHand'>
-			      </ul>
+						</ul>​
 			    </div>
 			  </div>
 
-			  <div class="grey-box"><strong>Nouns Used:</strong> Airplane, Leslie Knope, Wilfred, South Africa, Varnish, Basketball, Breakfast, Instruments, Lumber, Australia,
-			Games,Minister, Government, Silver, Sidewalk, Zoo, Voyage, Sketch, Architecture
+			  <div id="words_used">
 			  </div>
 		  </div>
 
@@ -81,7 +83,7 @@
 						<%= image_tag "border.jpg"%>
 		        <div class="chat-bottom">
 		          <div class="chat-bottom-left">
-		            <input id='chat-input' type='text' onkeypress='{if(event.keyCode==13)sendChatLine()}'></input>
+		            <input id='chat-input' type='text'></input>
 		          </div>
 		          <div class="chat-bottom-right">
 		            <div class="btn"><a href="#">send </a></div>
@@ -91,7 +93,7 @@
 		      </div>
 		    </div>
 
-		  <div class="score-box">
+		  <div id="player_list" class="score-box">
 		    <div class="title">
 		      <div class="players">Players</div>
 		      <div class="scores">Scores</div>
@@ -116,7 +118,7 @@
 		  </div>
 
 		  </div>
-		  <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | 
+		  <div class=π"footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | 
   	<script type="text/javascript">
 			// Popup window code
 			function chooseCard(element) {
@@ -125,7 +127,8 @@
 			  	console.log("JFKLS");
 			  }); 
 			}
-			$('#userHand').load('/cards/hand/game/' + <%= @game.id %>); 
+			//$('#userHand').load('/cards/hand/game/' + <%= @game.id %>); 
+			
 		</script>
 		<br>
 		</div>

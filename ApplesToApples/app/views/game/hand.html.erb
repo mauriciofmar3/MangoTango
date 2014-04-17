@@ -1,3 +1,5 @@
-<% @hand.each do |card| %>
-	<li><div class="name noun-card" onclick='chooseCard(this)'><%= card.word %></div><div class="sign">?</div></li>
-<% end %>
+<ul id='userHand'>
+	<% @hand.each do |card| %>
+		<li><div class="name noun-card"><%= card.word %></div><div class="sign">?</div></li>
+	<% end %>
+</ul>​

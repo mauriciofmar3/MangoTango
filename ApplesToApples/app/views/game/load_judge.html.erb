@@ -1,0 +1,5 @@
+<ul id='playedCards'>
+	<% @game.used_cards.each do |card| %>
+  	<li><div class="name judge-card"><%= card.word %></div><div class="sign">?</div></li>
+ 	<% end %>
+</ul>​

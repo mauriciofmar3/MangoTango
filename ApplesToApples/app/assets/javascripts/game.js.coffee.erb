@@ -1,0 +1,95 @@
+$ ->
+	name = $("#user_name").html();
+	
+	#websocket stuff
+	url = "ws://<%="#{EVENTCHAT_CONFIG[:host]}:#{EVENTCHAT_CONFIG[:port]}"%>"
+	ws = new WebSocket(url)	 
+	ws.open
+	
+	$("#chat-input").on 'keypress', (e) ->			
+		if e.keyCode == 13
+			message = $("#chat-input")
+			ws.send(JSON.stringify({id: name, table_id: $('#game_id').html(), action: "say", data : message.val()}))
+			message.val('')
+	
+	$('.name.noun-card').on 'click', () ->		
+		$.ajax ('/cards/hand/game/' + $('#game_id').html() + '/word/' + this.innerHTML), 
+			type: 'GET'
+			dataType: 'html'
+			(data) -> pick_card(this)
+
+	ws.onopen = ->
+		ws.send(JSON.stringify({id: name, table_id: $('#game_id').html(), action: "connect"}))
+		
+	ws.onmessage = (message) ->
+		split = split_colon(message.data)
+		if split[0] == 'chat' && split[1].indexOf('table' + $('#game_id').html()) > 0
+			chat(split_colon(split[1])[1])
+		if split[0] == 'pick_card'
+			load_hand()
+		
+	chat = (message) ->
+		split = split_colon(message)
+		div = document.createElement('div')
+		$(div).html('<span style="color:#F00"><strong>' + split[0] + ':</strong></span>' + split[1])
+		last = $('.chat-content').children().last()
+		if last.size() == 0 || last.html() != $(div).html()
+			$(".chat-content").append(div)
+		$(".chat-content").scrollTop(1000000)
+		
+	pick_card = (word) ->
+		ws.send(JSON.stringify({id: name, table_id: $('#game_id').html(), action: "pick_card", data : word}))
+		load_hand()
+		
+	load_played_cards = () -> 
+		$('#playedCards').load('/cards/judge/game/' + $('#game_id').html() + ' #playedCards', () -> 
+			add_card_click_listeners('.judge-card')
+		)
+		
+	load_hand = () ->
+		console.log('loading hand')
+		$('#userHand').load('/cards/hand/game/' + $('#game_id').html() + ' #userHand', () ->
+			add_card_click_listeners('.name.noun-card')
+			load_played_cards()
+			refresh_page()
+		)
+		
+	add_card_click_listeners = (selector) ->
+		$(selector).on 'click', () ->		
+			word = this.innerHTML
+			$.ajax ('/cards/hand/game/' + $('#game_id').html() + '/word/' + this.innerHTML), 
+				type: 'GET'
+				dataType: 'html' 
+				success: (data, textStatus, jqXHR) ->
+					console.log('success ' + word)
+					pick_card(word)
+		
+	load_hand()
+		
+	split_colon = (s) -> [s.substring(0, s.indexOf(':')), s.substring(s.indexOf(':') + 1)]
+		
+	refresh_element = (path, selector) ->
+		$(selector).load(path + ' ' + selector)
+	
+	refresh_page = () -> 
+		refresh_element('/game/' + $('#game_id').html() + '/current_adjective/', '#adjective')
+		refresh_element('/game/' + $('#game_id').html() + '/round_information/', '#round_info')
+		refresh_element('/game/' + $('#game_id').html() + '/player_list/', '#player_list')
+		refresh_element('/game/' + $('#game_id').html() + '/round_winner/', '#round_winner')
+		refresh_element('/game/' + $('#game_id').html() + '/words_used/', '#words_used')
+	
+	
+	
+	
+	
+	
+	ws.onclose = ->
+		#onclose not firing for some reason
+		
+	#save chat log
+	$("#save_chat_log").submit (event) ->
+		$.post this.action, {chat_data : $("#chat_window").html().replace(/<br>/g, "\n")}, (data) ->
+			log_link = $("#log_link")
+			log_link.attr('href', data)
+			log_link.show()
+		event.preventDefault()

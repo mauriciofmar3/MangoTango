@@ -1,0 +1,21 @@
+
+<body>
+    <div id='wrapper'>
+      <div id='chat_window'></div>
+    </div>
+    <div id='chat_input'>
+      <form accept-charset="UTF-8" action="/" id="message_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" />
+      <input name="authenticity_token" type="hidden" value="OMPP87qMlpDrVT7Sl8y0cvzjsSP8w+UQY59DeyKxv3U=" /></div>
+        <span id='name'></span>
+        <input id="message" name="message" type="text" />
+        <input name="commit" type="submit" value="Chat" />
+      </form>
+      <br>
+      <form accept-charset="UTF-8" action="/chat/save" id="save_chat_log" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" />
+      <input name="authenticity_token" type="hidden" value="OMPP87qMlpDrVT7Sl8y0cvzjsSP8w+UQY59DeyKxv3U=" /></div>
+        <input name="commit" type="submit" value="Save Chat Log" />
+      </form>
+      <br>
+      <a href="/chat/view" id="log_link" target="_blank">Log Saved. Click Here to View</a>
+    </div>
+  </body>

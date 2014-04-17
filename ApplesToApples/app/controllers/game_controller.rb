@@ -64,6 +64,7 @@ class GameController < ApplicationController
 
   def current_adjective
     @game = Game.find(params[:game])
+    @player = Player.find_by(user_id: User.find_by(name: cookies[:user]).id, game_id: @game.id)
   end
   
   def player_list

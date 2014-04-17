@@ -20,12 +20,6 @@ class Player < ActiveRecord::Base
     new_words.each do |word|
       cards << Card.create(game_id: self.game_id, player_id: self.id, word_id: word.id, used: 0, chosen: 0)  
     end
-    #while cards.size < 7 do
-    #  word = Word.find(rand(Word.count))
-    #  if Card.where(word_id: word.id, game_id: self.game_id).size == 0
-    #    cards << Card.create(game_id: self.game_id, player_id: self.id, word_id: word.id, used: 0)
-    #  end
-    #end
     cards.uniq
   end
   

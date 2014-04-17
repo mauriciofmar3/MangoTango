@@ -1,1 +1,8 @@
-<div id="adjective" class="box-bottoml">ADJECTIVE: <%= @game.current_adjective.word %></div>
+<div id="adjective" class="box-bottoml">
+	ADJECTIVE: <%= @game.current_adjective.word %>
+	<% if @game.max_players == @game.players.size && @player.id == @game.current_player_id %>
+		(JUDGE)
+	<% else %>
+		(NOT THE JUDGE)
+	<% end %>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414160708) do
+ActiveRecord::Schema.define(version: 20140417021005) do
 
   create_table "cards", force: true do |t|
     t.integer  "game_id"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20140414160708) do
     t.integer  "player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "chosen"
     t.integer  "used",       default: 0
+    t.integer  "chosen",     default: 0
   end
 
   create_table "chat_logs", force: true do |t|

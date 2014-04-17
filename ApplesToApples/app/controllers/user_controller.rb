@@ -15,7 +15,7 @@ class UserController < ApplicationController
       cookies[:user] = params[:name] 
       redirect_to :controller => 'game', :action => 'index'
     else
-      redirect_to :controller => 'user', :action => 'index'
+      redirect_to :controller => 'game', :action => 'login'
     end
   end
   

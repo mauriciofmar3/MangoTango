@@ -11,26 +11,35 @@
 	<meta charset="UTF-8">
 	<title>Mango Tango</title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<%= stylesheet_link_tag "default" %>
+	<%= stylesheet_link_tag "fonts" %>
 	</head>
 
 	<body>
 		<div class="maint">
-		  <div class="headert">
-		    <div class="logo"><%= image_tag "logo.png" %></div>
-		    <div class="header-center">
+			
+	  <div class="headert">
+	    <div class="logo"><%= image_tag "logo.png" %></div>
+	    <div class="header-center">
+	      <div class="menut"><a href="#" class="current">Home</a> <a href="#">About</a> <a href="#">Tutorail</a></div>
+	      <div class="coffee"><a href="#">Like the Game? <br/>Buy Us a Coffee</a></div>
+	    </div>
+	    <div class="header-right">
+		    <div class="social">
+		    	<div class="header-leftl"><a href="#">Logout</a></div>
 		    </div>
-		    <div class="header-right">
-		      <input type='button' value='Log Out' id='LogOut'></input>
-		    </div>
-		  </div>
+	    
+	    </div>
+	  </div>
 
 			<div id='user_name' style='display: none'><%= cookies[:user] %></div>
 			<div id='game_id' style='display: none'><%= @game.id %></div>
 		  <div class="body-content">
 		  <div class="content-left">
-		  	<h2 id="round-winner">mau Wins Round 01!</h2>
-		  	<h3><%= "#{@game.name} #{@game.current_player_id} #{@game.current_round}  #{@game.current_player.name}" %></h3>
-				<h3><%= Card.all.pluck(:used) %></h3>
+		  	<h2 id="round_winner">mau Wins Round 01!</h2>
+		  	<!--h3><%= "#{@game.name} #{@game.current_player_id} #{@game.current_round}  #{@game.current_player.name}" %></h3>
+				<h3><%= Card.all.pluck(:used) %></h3-->
 
 			  <div class="green-box">
 			    <div class="box-top">

@@ -10,8 +10,6 @@ class GameController < ApplicationController
     if(User.where(name: params[:name]).count > 0)
       cookies[:user] = params[:name]
       redirect_to controller: 'game', action: 'join', game: '1'
-    else
-      redirect_to :controller => 'game', :action => 'index'
     end
   end
 
@@ -29,6 +27,10 @@ class GameController < ApplicationController
 
   def join
     @game = Game.find(params[:game])
+    user = User.where(name: cookies[:user]).first
+    if Player.where(user_id: user.id, game_id: @game.id).size == 0
+      Player.create(user_id: user.id, game_id: @game.id, score: 0)
+    end
     @players = @game.players
     @player = Player.where(user_id: User.where(name: cookies[:user]).first.id).first
     @last_winner = @game.last_winner || "-" 
@@ -36,6 +38,10 @@ class GameController < ApplicationController
 
   def leave
     # return to lobby
+  end
+  
+  def lobby
+    @games = Game.all
   end
   
   def register
@@ -62,9 +68,17 @@ class GameController < ApplicationController
   
   def round_winner
     @game = Game.find(params[:game])
-    @chosen_card = Card.where(game_id: @game.id, chosen: @game.current_round-1)
-    @last_winner = @chosen_card.player
-    @last_adjective = Word.joins(:cards).where('cards.game_id' => @game.id, 'cards.used' => @game.current_round-1, adjective: true)
+    @chosen_card = Card.where(game_id: @game.id, chosen: @game.current_round-1).first
+    unless @chosen_card.empty?
+      puts Card.all.pluck(:chosen)
+      puts "#{@game.current_adjective.word} #{@game.current_adjective.chosen}"
+      @last_winner = @chosen_card.player
+      @last_adjective = Word.joins(:cards).where('cards.game_id' => @game.id, 'cards.used' => @game.current_round-1, adjective: true).first
+      puts "adjective #{@last_adjective.word}" 
+      puts "word #{@chosen_card.word}"
+      @last_adjective_word = @last_adjective.word
+      @chosen_card_word = @chosen_card.word
+    end
   end
   
   def words_used

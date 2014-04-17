@@ -1,7 +1,8 @@
 ApplesToApples::Application.routes.draw do
   
-    root :to => 'user#index'
-    get '/game/index', to: 'game#index'
+    root :to => 'game#login'
+    get '/login', to: 'game#login'
+    get '/lobby', to: 'game#lobby'
     get '/game/join/:game', to: 'game#join'
     get '/game/create/:name', to: 'game#login'
     get '/user/index', to: 'user#index'
@@ -22,7 +23,7 @@ ApplesToApples::Application.routes.draw do
     get '/chat', to: 'chat#index'
     
     
-    get '/game/tutorial', to: 'game#tutorial'
+    get '/tutorial', to: 'game#tutorial'
     
     
     # refresh stuff

@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Go-Mango</title>
+<link href="/assets/style.css" rel="stylesheet" type="text/css">
+<link href="/assets/fonts.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div class="maint">
+  <div class="headert">
+    <div class="logo"><img src="assets/logo.png" alt=""></div>
+    <div class="header-center">
+      <div class="menut"><a href="#" class="current">Home</a> <a href="#">About</a> <a href="#">Tutorail</a></div>
+      <div class="cofy"><a href="#">Like the Game? <br/>
+Buy Us a Coffee</a></div>
+    </div>
+    <div class="header-right">
+    <div class="social">
+    <div class="header-leftl"><a href="#">Logout</a></div>
+    </div>
+    
+    </div>
+  </div>
+ 
+  
+  <div class="body-content">
+  <div class="content-left">
+  <div class="login-box">
+  <h2>CREATE GAME</h2>
+  
+  <div class="input-bg">
+  <div class="lablet">Table Name:</div>
+  <div class="inputt"><input type="text" class="namet"></div>
+  </div>
+  <div class="input-bg">
+  <div class="lablet">Set Rounds:</div>
+  <div class="inputt"><select><option>1</option></select></div>
+  <div class="lablet">Max Players:</div>
+  <div class="inputt"><select><option>1</option></select></div>
+  </div>
+  <div class="input-bg">
+  <div class="lablet">Password:</div>
+  <div class="inputt"><input type="text" class="namet"></div>
+  </div>
+  <div class="input-bg">
+  <div class="lablet">Unranked:</div>
+  <div class="inputt"><input type="checkbox" class="pt"></div>
+  <div class="texitt">Table #:  00001534</div>
+  </div>
+   <div class="input-bg">
+ 
+  <div class="settingone"><input type="checkbox" ></div>
+  <div class="settingtwo">Make this the
+Default Setting</div>
+  <div class="settingthree"><input type="submit" value="" class="sbtnimg"></div>
+  
+  </div>
+  
+  </div>
+  
+  <div class="announc">
+  <div class="announc-top">
+  <div class="announc-title">ANNOUNCEMENTS</div>
+  <div class="announc-arrow"><a href="#"><img src="assets/darrow.png" alt=""></a><a href="#"><img src="assets/uarrow.png" alt=""></a></div>
+  </div>
+   <div class="announc-text">
+   <div class="announct">By Mau on Oct. 25, 2013 - 10:25 PM
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </div>
+<div class="announct">By Mau on Oct. 25, 2013 - 10:25 PM
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </div>
+<div class="announct">By Mau on Oct. 25, 2013 - 10:25 PM
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </div>
+   </div>
+  </div>
+  </div>
+  <div class="content-right">
+  <div class="searchtbg">
+  <div class="searchnametextt">Search</div>
+  <input type="text" placeholder="Name/User" class="searchnamet">
+  </div>
+  <div class="score-box-outer">
+  <div class="score-box">
+  <div class="title">
+	  <div class="tablename">Table Name</div>
+	  <div class="lock">Lock</div>
+	  <div class="rounds">Rounds</div>
+	  <div class="players">Players</div>
+	  <div class="status">Status</div>
+	  <div class="join">Join</div>
+  </div>
+  <% @games.each do |game| %>
+	  <div class="score-content">
+		  <div class="tablename"><%= game.name %></div>
+		  <div class="lock"><a href="#"><img src="assets/unlocked.png" width="14" height="16"  alt=""/></a></div>
+		  <div class="rounds"><%= game.current_round %>/<%= game.max_rounds %></div>
+		  <div class="players"><%= game.players.size %>/<%= game.max_players %></div>
+		  <div class="status"><%= game.finished ? "finished" : (game.players.size == game.max_players ? "Started" : "Waiting" ) %></div>
+		  <div class="join"><a href="<%= "game/join/#{game.id}" %>"><img src="assets/arrow-copy-3.png" width="13" height="8"  alt=""/></a></div>
+	  </div>
+  <% end %>
+  <div class="score-box-bottom">
+  <div class="pagignation-center">
+  <div class="prev"><a href="#"><img src="assets/prev.png" alt=""></a></div>
+  <div class="numb"><a href="#" class="pcurrent">1</a> - <a href="#">2</a> - <a href="#">3</a> ... <a href="#">»</a></div>
+  <div class="next"><a href="#"><img src="assets/next.png" alt=""></a></div>
+  </div>
+  </div>
+  <div class="joitable">
+  <div class="jointablet">Table - Rawxy: <span class="greyt">Rawr </span>, Roax, Mau, Yo, Blah, GameName</div>
+  <div class="jointableb"><a href="#">Joint Table</a></div>
+  </div>
+ 
+  </div></div>
+  </div>
+  </div>
+  <div class="footer">Home | <a href="#" class="current">ABOUT</a> | <a href="#">CONTACT US</a> | <a href="#">REPORT A PROBLEM</a> | <a href="#">SUGGESTIONS</a> | <a href="#">HELP</a> | <a href="#">PRIVACY</a><br>
+© 2013 LATER, MAUXY. ALL RIGHTS RESERVED.</div>
+  <div class="clrt"></div>
+</div>
+</body>
+</html>

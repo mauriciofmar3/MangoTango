@@ -53,7 +53,6 @@ class Game < ActiveRecord::Base
     player_not_played = Card.where(game_id: self.id, player_id: player.id, used: self.current_round).empty?
     player_owns_card = player.id == card.player.id
     game_not_finished = !self.finished
-    puts "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
     puts "#{game_started} #{player_not_judge} #{player_not_played} #{player_owns_card} #{game_not_finished}"
     if game_started and player_not_judge and player_not_played and player_owns_card and game_not_finished
       card = Card.find(card.id)
@@ -91,6 +90,7 @@ class Game < ActiveRecord::Base
       # card updates
       adjective = self.current_adjective
       adjective.used = self.current_round
+      card = Card.find(card.id)
       card.chosen = self.current_round
       
       #game updates

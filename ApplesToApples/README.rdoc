@@ -42,3 +42,4 @@ bugs:
 -chat input box in safari doesn't pop up. Works in other browsers.
 -tells when you connect in other games(all players) but not what you say 
 -if using the nutsy cards package, the cards can't be picked when judge if “&” is in the card. Can edit them out if you'd like. 
+-when linked to a game, you sometimes have to refresh
